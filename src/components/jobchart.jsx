@@ -7,7 +7,9 @@ const JobChart = ({ data }) => {
     const jobCount = {};
     data.forEach((applicant) => {
       const jobName = applicant["Job name"];
-      jobCount[jobName] = (jobCount[jobName] || 0) + 1; 
+      if (jobName) { // Check if jobName is defined
+        jobCount[jobName] = (jobCount[jobName] || 0) + 1; 
+      }
     });
 
     return {
@@ -25,10 +27,13 @@ const JobChart = ({ data }) => {
   };
 
   const chartData = getJobData();
+  const totalApplicants = chartData.datasets[0].data.reduce((a, b) => a + b, 0); // Calculate total applicants
+
+  console.log("Total Applicants: ", totalApplicants); // Debugging line
 
   return (
     <div className="p-6 bg-white rounded-lg shadow-md h-full"> 
-      <h2 className="text-2xl font-semibold mb-4">Job Distribution</h2>
+      <h2 className="text-2xl font-semibold mb-4">Job Distribution (Total: {totalApplicants})</h2> {/* Show total */}
       <div 
         style={{ 
           height: '500px', 
