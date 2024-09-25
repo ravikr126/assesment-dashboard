@@ -27,36 +27,34 @@ const JobChart = ({ data }) => {
   const chartData = getJobData();
 
   return (
-    <div className="p-6 bg-white rounded-lg shadow-md max-w-half">
+    <div className="p-6 bg-white rounded-lg shadow-md h-full"> 
       <h2 className="text-2xl font-semibold mb-4">Job Distribution</h2>
       <div 
         style={{ 
-          height: '500px', // Total height of the chart container
-          overflowY: 'auto', // Enable vertical scrolling
-          width: '100%', // Full width
+          height: '500px', 
+          overflowY: 'auto', 
+          width: '100%',
         }}
       >
-        <div style={{ height: '100%', width: '100%' }}> {/* Full size wrapper for the Bar chart */}
-          <Bar
-            data={chartData}
-            options={{
-              indexAxis: 'y', 
-              responsive: true,
-              maintainAspectRatio: false, // Set to false to respect container height
-              scales: {
-                x: {
-                  beginAtZero: true,
-                },
-                y: {
-                  grid: {
-                    display: false, 
-                  },
+        <Bar
+          data={chartData}
+          options={{
+            indexAxis: 'y', 
+            responsive: true,
+            maintainAspectRatio: false, 
+            scales: {
+              x: {
+                beginAtZero: true,
+              },
+              y: {
+                grid: {
+                  display: false, 
                 },
               },
-            }}
-            height={400} // The height of the chart can be adjusted based on your preference
-          />
-        </div>
+            },
+          }}
+          height={400} 
+        />
       </div>
     </div>
   );

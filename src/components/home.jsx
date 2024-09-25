@@ -7,36 +7,34 @@ const Home = () => {
   const [applicantsData, setApplicantsData] = useState([]);
 
   useEffect(() => {
-    // Fetch data using axios
+   
     axios
-      .get("/data.json") // Assuming the file is located in the public folder
+      .get("/data.json") 
       .then((response) => {
-        setApplicantsData(response.data); // Set the data
+        setApplicantsData(response.data);
       })
       .catch((error) => {
         console.error("Error fetching the data", error);
       });
   }, []);
-
-  // Get unique job names by creating a Set from the job names in the data
   const totalJobs = new Set(
     applicantsData.map((applicant) => applicant["Job name"])
   ).size;
-  const totalApplicants = applicantsData.length; // Calculating total applicants dynamically
-  const aiCredits = 20000; // Example data for AI credits
+  const totalApplicants = applicantsData.length; 
+  const aiCredits = 20000;
 
   const columns = React.useMemo(
     () => [
       {
-        Header: "Latest Candidate", // Table header for the candidates list
+        Header: "Latest Candidate", 
         columns: [
           {
             Header: "Name",
-            accessor: "Name", // Accessor is the key in the JSON data
+            accessor: "Name",
           },
           {
             Header: "Job Name",
-            accessor: "Job name", // Accessor matches the key from JSON data
+            accessor: "Job name",
           },
           {
             Header: "Rating",
@@ -52,8 +50,7 @@ const Home = () => {
     []
   );
 
-  // React Table hook for table setup
-  const { getTableProps, getTableBodyProps, headerGroups, rows, prepareRow } =
+   const { getTableProps, getTableBodyProps, headerGroups, rows, prepareRow } =
     useTable({
       columns,
       data: applicantsData,
@@ -69,12 +66,12 @@ const Home = () => {
           for a new era of your workspace from here.
         </p>
 
-        {/* Stats section */}
+        
         <div className="grid grid-cols-1 md:grid-cols-4 gap-6 mt-6">
           <div className="bg-white p-4 rounded-lg shadow-md">
             <div className="flex items-center">
               <div className="bg-blue-100 p-2 rounded-full">
-                {/* Icon */}
+              
                 <span role="img" aria-label="jobs">
                   💼
                 </span>
@@ -89,14 +86,14 @@ const Home = () => {
           <div className="bg-white p-4 rounded-lg shadow-md">
             <div className="flex items-center">
               <div className="bg-yellow-100 p-2 rounded-full">
-                {/* Icon */}
+             
                 <span role="img" aria-label="applicants">
                   👥
                 </span>
               </div>
               <div className="ml-4">
                 <p className="text-lg font-bold">{totalApplicants}</p>{" "}
-                {/* Total applicants */}
+              
                 <p className="text-sm text-gray-500">Applicants</p>
               </div>
             </div>
@@ -105,7 +102,7 @@ const Home = () => {
           <div className="bg-white p-4 rounded-lg shadow-md">
             <div className="flex items-center">
               <div className="bg-purple-100 p-2 rounded-full">
-                {/* Icon */}
+             
                 <span role="img" aria-label="credits">
                   ✉️
                 </span>
@@ -122,7 +119,7 @@ const Home = () => {
           <div className="bg-white p-4 rounded-lg shadow-md">
             <div className="flex items-center">
               <div className="bg-pink-100 p-2 rounded-full">
-                {/* Icon */}
+              
                 <span role="img" aria-label="private-board">
                   📝
                 </span>
@@ -137,65 +134,66 @@ const Home = () => {
           </div>
         </div>
       </div>
-
       <div className="flex w-full h-[600px] gap-3 mt-5">
-        <div className="p-6 bg-white h-[600px] rounded-lg shadow-md w-full">
-          <h2 className="text-2xl font-semibold mb-4">Latest Candidates</h2>
+  <div className="p-6 bg-white h-full rounded-lg shadow-md flex-1">
+   <h2 className="text-2xl font-semibold mb-4">Latest Candidates</h2>
 
-          {applicantsData.length === 0 ? (
-            <p>Loading data or no data available...</p>
-          ) : (
-            <div style={{ height: "500px", overflowY: "auto" }}>
-              {" "}
-              {/* Fixed height and scrollable */}
-              <table
-                {...getTableProps()}
-                className="min-w-full bg-white border border-gray-300 rounded-lg shadow-md"
+    {applicantsData.length === 0 ? (
+      <p>Loading data or no data available...</p>
+    ) : (
+      <div style={{ height: "500px", overflowY: "auto" }}>
+        <table
+          {...getTableProps()}
+          className="min-w-full bg-white border border-gray-300 rounded-lg shadow-md"
+        >
+          <thead>
+            {headerGroups.map((headerGroup) => (
+              <tr
+                {...headerGroup.getHeaderGroupProps()}
+                className="bg-gray-100 text-left"
               >
-                <thead>
-                  {headerGroups.map((headerGroup) => (
-                    <tr
-                      {...headerGroup.getHeaderGroupProps()}
-                      className="bg-gray-100 text-left"
+                {headerGroup.headers.map((column) => (
+                  <th
+                    {...column.getHeaderProps()}
+                    className="p-4 text-gray-700 font-semibold"
+                  >
+                    {column.render("Header")}
+                  </th>
+                ))}
+              </tr>
+            ))}
+          </thead>
+          <tbody {...getTableBodyProps()}>
+            {rows.map((row) => {
+              prepareRow(row);
+              return (
+                <tr
+                  {...row.getRowProps()}
+                  className="border-t border-gray-300 hover:bg-gray-50"
+                >
+                  {row.cells.map((cell) => (
+                    <td
+                      {...cell.getCellProps()}
+                      className="p-4 text-gray-700"
                     >
-                      {headerGroup.headers.map((column) => (
-                        <th
-                          {...column.getHeaderProps()}
-                          className="p-4 text-gray-700 font-semibold"
-                        >
-                          {column.render("Header")}
-                        </th>
-                      ))}
-                    </tr>
+                      {cell.render("Cell")}
+                    </td>
                   ))}
-                </thead>
-                <tbody {...getTableBodyProps()}>
-                  {rows.map((row) => {
-                    prepareRow(row);
-                    return (
-                      <tr
-                        {...row.getRowProps()}
-                        className="border-t border-gray-300 hover:bg-gray-50"
-                      >
-                        {row.cells.map((cell) => (
-                          <td
-                            {...cell.getCellProps()}
-                            className="p-4 text-gray-700"
-                          >
-                            {cell.render("Cell")}
-                          </td>
-                        ))}
-                      </tr>
-                    );
-                  })}
-                </tbody>
-              </table>
-            </div>
-          )}
-        </div>
-
-        <JobChart data={applicantsData} />
+                </tr>
+              );
+            })}
+          </tbody>
+        </table>
       </div>
+    )}
+  </div>
+
+ 
+  <div className="p-6 bg-white h-full rounded-lg shadow-md flex-1"> 
+    <JobChart data={applicantsData} />
+  </div>
+</div>
+
     </div>
   );
 };
