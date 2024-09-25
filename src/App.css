@@ -36,3 +36,9 @@
     transform: rotate(360deg);
   }
 }
+
+
+.chart-container {
+  height: 400px;  /* Fixed height */
+  width: 100%;    /* Full width */
+}
