@@ -27,13 +27,13 @@ const JobChart = ({ data }) => {
   };
 
   const chartData = getJobData();
-  const totalApplicants = chartData.datasets[0].data.reduce((a, b) => a + b, 0); // Calculate total applicants
+  const totalApplicants = chartData.datasets[0].data.reduce((a, b) => a + b, 0); 
 
-  console.log("Total Applicants: ", totalApplicants); // Debugging line
+  console.log("Total Applicants: ", totalApplicants);
 
   return (
     <div className="p-6 bg-white rounded-lg shadow-md h-full"> 
-      <h2 className="text-2xl font-semibold mb-4">Job Distribution (Total: {totalApplicants})</h2> {/* Show total */}
+      <h2 className="text-2xl font-semibold mb-4">Job Distribution (Total: {totalApplicants})</h2> 
       <div 
         style={{ 
           height: '500px', 

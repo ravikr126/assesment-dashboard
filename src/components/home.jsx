@@ -57,69 +57,70 @@ const Home = () => {
 
   return (
     <div className="p-6 bg-gray-100 min-h-screen">
-      <div className="bg-[#C4D7FF] p-6 rounded-lg shadow-lg">
-        <h2 className="text-2xl font-semibold">Welcome back, Lewis</h2>
-        <p className="mt-2 text-gray-600 text-2xl">
-          Here's what's changed in your talent hunt journey! You can evaluate
+      <div className="bg-[#C4D7FF] p-10 rounded-lg shadow-lg flex flex-col gap-5">
+        <h2 className="text-6xl font-semibold">Welcome back, Lewis</h2>
+        <p className="mt-2 text-gray-600 text-2xl font-medium">
+          Here's what's changed in your talent hunt journey!
+           You can evaluate
           candidates, attract job seekers, and redefine the candidate experience
           for a new era of your workspace from here.
         </p>
 
-        <div className="grid grid-cols-1 md:grid-cols-4 gap-6 mt-6">
-          <div className="bg-white p-4 rounded-lg shadow-md">
-            <div className="flex items-center">
-              <div className="bg-blue-100 p-2 rounded-full">
-                <span role="img" aria-label="jobs">
-                  💼
-                </span>
+        <div className="grid grid-cols-1 md:grid-cols-2 gap-6 mt-6">
+          <div className="flex flex-col gap-3">
+            <div className="bg-white p-8  rounded-lg shadow-md flex justify-between">
+              <div className="flex items-center">
+                <div className="bg-blue-100 p-4  rounded-full">
+                  <span role="img" aria-label="jobs">
+                    💼
+                  </span>
+                </div>
+                <div className="ml-4">
+                  <p className=" font-bold text-3xl">{totalJobs}</p>
+                  <p className="text-xl font-medium text-gray-500">Total Jobs</p>
+                </div>
               </div>
-              <div className="ml-4">
-                <p className="text-lg font-bold">{totalJobs}</p>
-                <p className="text-sm text-gray-500">Total Jobs</p>
+
+              <div className="flex items-center">
+                <div className="bg-yellow-100 p-4 rounded-full">
+                  <span role="img" aria-label="applicants">
+                    👥
+                  </span>
+                </div>
+                <div className="ml-4">
+                  <p className="text-3xl font-bold">{totalApplicants}</p>{" "}
+                  <p className="text-xl font-medium text-gray-500">Applicants</p>
+                </div>
+              </div>
+            </div>
+
+            <div className="bg-white p-8 rounded-lg shadow-md">
+              <div className="flex items-center">
+                <div className="bg-purple-100 p-4 rounded-full">
+                  <span role="img" aria-label="credits">
+                    ✉️
+                  </span>
+                </div>
+                <div className="ml-4">
+                  <p className="text-3xl font-bold ">
+                    {aiCredits.toLocaleString()}
+                  </p>
+                  <p className="text-xl font-medium text-gray-500">AI credits</p>
+                </div>
               </div>
             </div>
           </div>
 
-          <div className="bg-white p-4 rounded-lg shadow-md">
-            <div className="flex items-center">
-              <div className="bg-yellow-100 p-2 rounded-full">
-                <span role="img" aria-label="applicants">
-                  👥
-                </span>
-              </div>
-              <div className="ml-4">
-                <p className="text-lg font-bold">{totalApplicants}</p>{" "}
-                <p className="text-sm text-gray-500">Applicants</p>
-              </div>
-            </div>
-          </div>
-
-          <div className="bg-white p-4 rounded-lg shadow-md">
-            <div className="flex items-center">
-              <div className="bg-purple-100 p-2 rounded-full">
-                <span role="img" aria-label="credits">
-                  ✉️
-                </span>
-              </div>
-              <div className="ml-4">
-                <p className="text-lg font-bold">
-                  {aiCredits.toLocaleString()}
-                </p>
-                <p className="text-sm text-gray-500">AI credits</p>
-              </div>
-            </div>
-          </div>
-
-          <div className="bg-white p-4 rounded-lg shadow-md">
-            <div className="flex items-center">
-              <div className="bg-pink-100 p-2 rounded-full">
+          <div className="bg-white p-8 rounded-lg shadow-md flex flex-col ">
+           <div className="flex items-center">
+              <div className="bg-pink-100 p-4 rounded-full">
                 <span role="img" aria-label="private-board">
                   📝
                 </span>
               </div>
               <div className="ml-4">
                 <p className="text-lg font-bold">Private Job Board</p>
-                <p className="text-sm text-gray-500">
+                <p className="text-xl font-medium  text-gray-500">
                   Accessible via company-specific URL
                 </p>
               </div>
